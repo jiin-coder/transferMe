@@ -1,4 +1,5 @@
 Django
-mysqlclient
-django-dotenv
 pillow
+mysqlclient
+gunicorn
+django-debug-toolbar
