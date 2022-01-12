@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_bootstrap5',
     # 로컬
-    'accounts.apps.AccountsConfig',
     'base',
+    'accounts.apps.AccountsConfig',
+    'board.apps.BoardConfig',
 ]
 
 MIDDLEWARE = [
