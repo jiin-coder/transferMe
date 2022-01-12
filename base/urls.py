@@ -14,12 +14,14 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.http import HttpResponse
 from django.urls import path, include
 
+from . import views
+
 urlpatterns = [
-    path('', lambda request: HttpResponse("tme!")),
-    path('admin/', admin.site.urls),
+    path('', views.index, name="main"),
+    path('admin/', admin.site.urls, name="admin"),
+    path('accounts/', include('accounts.urls'), name="accounts"),
 ]
 
 if settings.DEBUG:
@@ -29,3 +31,4 @@ if settings.DEBUG:
     urlpatterns += [
         path('__debug__/', include(debug_toolbar.urls)),
     ]
+

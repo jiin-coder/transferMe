@@ -3,3 +3,4 @@ pillow
 mysqlclient
 gunicorn
 django-debug-toolbar
+django_bootstrap5
