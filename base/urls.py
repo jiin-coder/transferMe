@@ -18,7 +18,7 @@ from django.http import HttpResponse
 from django.urls import path, include
 
 urlpatterns = [
-    path('', lambda request: HttpResponse("Updated!")),
+    path('', lambda request: HttpResponse("tme!")),
     path('admin/', admin.site.urls),
 ]
 
