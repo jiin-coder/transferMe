@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'base.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'site7_dev', # DB명
+        'NAME': 'tme_dev', # DB명
         'USER': 'root', # DBMS 접속 아이디
         'PASSWORD': 'sbs123414', # DBMS 접속 비번
         'HOST': '127.0.0.1', # DBMS 주소

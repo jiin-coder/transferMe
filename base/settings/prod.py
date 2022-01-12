@@ -1,4 +1,4 @@
-from .common import *
+﻿from .common import *
 
 DEBUG = False
 
@@ -7,7 +7,7 @@ DEBUG = False
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'site7', # DB명
+        'NAME': 'tme', # DB명
         'USER': 'sbsstlocal', # DBMS 접속 아이디
         'PASSWORD': '1234', # DBMS 접속 비번
         'HOST': '172.17.0.1', # DBMS 주소
