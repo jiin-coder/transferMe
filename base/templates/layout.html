@@ -1,0 +1,42 @@
+<!doctype html>
+{% load static %}
+{% load humanize %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>TransferMe</title>
+</head>
+
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'main' %}"><i class="fab fa-pied-piper-hat"></i> TransferMe</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:signin' %}?next={{request.path}}"><i
+                                class="fas fa-sign-in-alt"></i> 로그인</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:signup' %}"><i class="fas fa-user-plus"></i> 회원가입</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section class="t-flex-1 t-py-[20px] t-flex t-flex-col">
+    {%block content%}
+    {%endblock%}
+</section>
+
+</html>
