@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container">
-    <h5 class="my-3 border-bottom pb-2">글 쓰기</h5>
+    <h1 class="t-text-[1.2rem] t-font-bold">글쓰기</h1>
     <form method="post" class="post-form my-3">
         {% csrf_token %}
         {{ form.as_p }}

@@ -9,9 +9,10 @@ def Article_create(request):
         form = ArticleForm(request.POST)
         if form.is_valid():
             article = form.save(commit=False)
+            article.writer = request.user
             article.reg_date = timezone.now()
             article.save()
-            return redirect('board:main')
+            return redirect('main')
     else:
         form = ArticleForm()
     return render(request, 'board/create.html', {'form': form})
