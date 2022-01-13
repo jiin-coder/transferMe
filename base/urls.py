@@ -18,10 +18,13 @@ from django.urls import path, include
 
 from . import views
 
+APP_NAME = ''
+
 urlpatterns = [
     path('', views.index, name="main"),
     path('admin/', admin.site.urls, name="admin"),
     path('accounts/', include('accounts.urls'), name="accounts"),
+    path('board/', include('board.urls'), name="board"),
 ]
 
 if settings.DEBUG:
@@ -31,4 +34,3 @@ if settings.DEBUG:
     urlpatterns += [
         path('__debug__/', include(debug_toolbar.urls)),
     ]
-
