@@ -1,14 +1,39 @@
-{% extends 'layout.html' %}
+{% extends "layout.html" %}
+{% load django_bootstrap5 %}
+
 {% block content %}
 
-{% if article_list %}
-    <ul>
-    {% for article in article_list %}
-        <li><a href="/board/{{ article.id }}/">{{ article.title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>게시물이 없습니다</p>
-{% endif %}
+<div class="container my-3">
+    <table class="table">
+        <thead>
+        <tr class="thead-dark">
+            <th>id</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일자</th>
+            <th>수정일자</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if articles %}
+        {% for article in articles %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+                <a href="{% url 'board:detail' article.id %}" style="text-decoration:none">{{ article.title }}</a>
+            </td>
+            <td>{{ article.writer }}</td>
+            <td>{{ article.reg_date }}</td>
+            <td>{{ article.update_date }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">게시글이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}

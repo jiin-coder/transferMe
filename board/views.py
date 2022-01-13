@@ -1,14 +1,17 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 
 from .forms import ArticleForm
 from .models import Article
 
+def Article_detail(request, article_id):
+    article = get_object_or_404(Article, pk=article_id)
+    context = {'article': article}
+    return render(request, 'board/article_detail.html', context)
 
 def Article_list(request):
-    article_list = Article.objects.order_by('-reg_date')
-    context = {'article_list': article_list}
-    return render(request, 'board/article_list.html', context)
+    articles = Article.objects.all().order_by('-id')
+    return render(request, 'board/article_list.html', {"articles": articles})
 
 def Article_create(request):
     if request.method == 'POST':
@@ -21,4 +24,4 @@ def Article_create(request):
             return redirect('main')
     else:
         form = ArticleForm()
-    return render(request, 'board/create.html', {'form': form})
+    return render(request, 'board/article_create.html', {'form': form})
