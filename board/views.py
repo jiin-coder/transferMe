@@ -2,7 +2,13 @@ from django.shortcuts import render, redirect
 from django.utils import timezone
 
 from .forms import ArticleForm
+from .models import Article
 
+
+def Article_list(request):
+    article_list = Article.objects.order_by('-reg_date')
+    context = {'article_list': article_list}
+    return render(request, 'board/article_list.html', context)
 
 def Article_create(request):
     if request.method == 'POST':

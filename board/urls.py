@@ -5,4 +5,5 @@ app_name = "board"
 
 urlpatterns = [
     path('create/', views.Article_create, name='create'),
+    path('list/', views.Article_list, name='list'),
 ]

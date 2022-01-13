@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% if article_list %}
+    <ul>
+    {% for article in article_list %}
+        <li><a href="/board/{{ article.id }}/">{{ article.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>게시물이 없습니다</p>
+{% endif %}
+
+{% endblock %}
