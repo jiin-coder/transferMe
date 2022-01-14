@@ -20,7 +20,7 @@
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>
-                <a href="{% url 'board:detail' article.id %}" style="text-decoration:none">{{ article.title }}</a>
+                <a href="{% url 'board:detail' article.id %}" style="text-decoration:none; color: inherit">{{ article.title }}</a>
             </td>
             <td>{{ article.writer }}</td>
             <td>{{ article.reg_date }}</td>
