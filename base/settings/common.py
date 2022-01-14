@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     # 로컬
     'base',
-    'accounts.apps.AccountsConfig',
-    'board.apps.BoardConfig',
+    'accounts',
+    'board',
 ]
 
 MIDDLEWARE = [
@@ -84,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tme_dev',  # DB명
         'USER': 'root',  # DBMS 접속 아이디
-        'PASSWORD': 'sbs123414',  # DBMS 접속 비번
+        'PASSWORD': '',  # DBMS 접속 비번
         'HOST': '127.0.0.1',  # DBMS 주소
         'PORT': '3306',  # DBMS 포트
         'OPTIONS': {

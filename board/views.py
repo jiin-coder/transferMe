@@ -6,8 +6,7 @@ from .models import Article
 
 def Article_detail(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
-    context = {'article': article}
-    return render(request, 'board/article_detail.html', context)
+    return render(request, 'board/article_detail.html', {'article': article})
 
 def Article_list(request):
     articles = Article.objects.all().order_by('-id')
