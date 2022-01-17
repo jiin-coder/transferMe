@@ -61,7 +61,9 @@ ROOT_URLCONF = 'base.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'base/templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tme_dev',  # DB명
         'USER': 'root',  # DBMS 접속 아이디
-        'PASSWORD': '',  # DBMS 접속 비번
+        'PASSWORD': 'sbs123414',  # DBMS 접속 비번
         'HOST': '127.0.0.1',  # DBMS 주소
         'PORT': '3306',  # DBMS 포트
         'OPTIONS': {
@@ -135,8 +137,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # 추가
 AUTH_USER_MODEL = 'accounts.User'
 
-INTERNAL_IPS = ['127.0.0.1']
-
 STATICFILES_DIRS = [
     BASE_DIR / 'base/static',
 ]
@@ -149,3 +149,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 CSRF_TRUSTED_ORIGINS = ['https://tme.sncode.kr']
 LOGIN_URL = '/accounts/signin'
 LOGIN_REDIRECT_URL = '/'
+
+INTERNAL_IPS = ['127.0.0.1']

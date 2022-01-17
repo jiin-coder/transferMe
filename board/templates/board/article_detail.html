@@ -1,6 +1,17 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<!-- 사용자오류 표시 -->
+{% if messages %}
+<div class="alert alert-danger my-3" role="alert">
+    {% for message in messages %}
+    <strong>{{ message.tags }}</strong>
+    <ul>
+        <li>{{ message.message }}</li>
+    </ul>
+    {% endfor %}
+</div>
+{% endif %}
 
 <div>{{ article.title }}</div>
 
@@ -15,5 +26,12 @@
 <hr>
 
 <div>{{ article.information_source }}</div>
+
+{% if request.user == question.author %}
+<div class="my-3">
+    <a href="{% url 'article:article_modify' article.id  %}"
+       class="btn btn-sm btn-outline-secondary">수정</a>
+</div>
+{% endif %}
 
 {% endblock %}
