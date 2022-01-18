@@ -13,6 +13,7 @@
 </div>
 {% endif %}
 
+
 <div>{{ article.title }}</div>
 
 <hr>
@@ -27,11 +28,11 @@
 
 <div>{{ article.information_source }}</div>
 
-{% if request.user == question.author %}
+
 <div class="my-3">
-    <a href="{% url 'article:article_modify' article.id  %}"
+    <a href="{% url 'board:article_modify' article.id %}"
        class="btn btn-sm btn-outline-secondary">수정</a>
 </div>
-{% endif %}
+
 
 {% endblock %}

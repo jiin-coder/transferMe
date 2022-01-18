@@ -129,6 +129,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / 'base/static',
+]
+STATIC_ROOT = BASE_DIR / 'static'
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -137,17 +143,44 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # 추가
 AUTH_USER_MODEL = 'accounts.User'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'base/static',
-]
-
-STATIC_ROOT = BASE_DIR / 'static'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
 CSRF_TRUSTED_ORIGINS = ['https://tme.sncode.kr']
 LOGIN_URL = '/accounts/signin'
 LOGIN_REDIRECT_URL = '/'
 
 INTERNAL_IPS = ['127.0.0.1']
+
+# Summernote 필수 설정
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+INSTALLED_APPS += ['django_summernote']
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Summernote 선택 설정
+SUMMERNOTE_THEME = 'bs4'
+
+SUMMERNOTE_CONFIG= {
+            'attachment_filesize_limit': 1024 * 1024,
+
+            # Summernote settings
+            'summernote': {
+                'width': 720,
+                'height': 480,
+                'lang': None,
+                'toolbar': [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'superscript', 'subscript',
+                              'strikethrough', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video', 'hr']],
+                    ['view', ['fullscreen', 'codeview']],
+                    ['help', ['help']],
+                ],
+            }
+        }
+

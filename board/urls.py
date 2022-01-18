@@ -4,8 +4,8 @@ from . import views
 app_name = "board"
 
 urlpatterns = [
-    path('create/', views.Article_create, name='create'),
+    path('create/', views.Article_write, name='write'),
     path('list/', views.Article_list, name='list'),
-    path('<int:article_id>/', views.Article_detail, name='detail'),
+    path('detail/<int:article_id>/', views.Article_detail, name='detail'),
     path('article/modify/<int:article_id>/', views.article_modify, name='article_modify'),
 ]
