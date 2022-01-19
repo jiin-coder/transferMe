@@ -7,9 +7,6 @@ from .models import Article
 
 class ArticleWriteForm(forms.ModelForm):
     # pass1
-
-
-
     class Meta:
         model = Article  # 사용할 모델
         # Form에서 사용할 모델의 속성
@@ -41,7 +38,7 @@ class ArticleWriteForm(forms.ModelForm):
                 self.add_error('one_source', '출처명')
             elif information_source == '':
                 self.add_error('information_source', '출처링크')
-            else :
+            else:
                 self.title = title
                 self.body = body
                 self.one_source = one_source

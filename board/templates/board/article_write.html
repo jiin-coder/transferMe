@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% load django_bootstrap5 %}
 
 {% block content %}
 <div>글 작성</div>
@@ -15,6 +16,6 @@
     {% if error %}
     {{ error }}
     {% endif %}
-    <button type="submit">업로드</button>
+    <button type="submit" class="btn btn-secondary">업로드</button>
 </form>
 {% endblock %}

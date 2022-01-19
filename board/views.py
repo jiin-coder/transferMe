@@ -35,11 +35,11 @@ def Article_list(request):
     return render(request, 'board/article_list.html', {"articles": articles})
 
 def Article_write(request):
-    login_session = request.session.get('login_session', '')
-    context = { 'login_session' : login_session }
+    article = Article.objects.all() # models의 Article 개체 생성
+    context = {'article': article}
 
     if request.method == 'GET':
-        write_form = Article_write()
+        write_form = ArticleWriteForm()
         context['forms'] = write_form
         return render(request, 'board/article_write.html', context)
 
@@ -47,7 +47,6 @@ def Article_write(request):
         write_form = ArticleWriteForm(request.POST)
 
         if write_form.is_valid():
-            writer = User.objects.get(user_id=login_session)
             article = Article(
                 title=write_form.title,
                 body=write_form.body,

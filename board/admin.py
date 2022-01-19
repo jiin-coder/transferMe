@@ -6,7 +6,7 @@ from django_summernote.admin import SummernoteModelAdmin
 
 @admin.register(Article)
 class BoardAdmin(SummernoteModelAdmin):
-    summernote_fields = ('contents', )
+    summernote_fields = ('body', )
     list_display = (
         'title',
         'body',
