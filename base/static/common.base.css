@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-family: 'KyoboHandwriting2020A';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/KyoboHandwriting2020A.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -17,7 +17,7 @@ html > body li {
 }
 
 html > body {
-    font-family: "GmarketSansMedium";
+    font-family: "KyoboHandwriting2020A";
     text-underline-position: under;
 }
 
