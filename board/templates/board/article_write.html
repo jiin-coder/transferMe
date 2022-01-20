@@ -2,14 +2,18 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-<div>글 작성</div>
+<div class="m-3">
+    <h1 style="font-size:2rem;">글 작성</h1>
+</div>
+
+
 <form action="" method='POST'>
     {% csrf_token %}
 
     {% for form in forms %}
-    <div>
-        <label for="{{ form.id_For_label }}">{{ form.label }}</label>
-        {{ form }}
+    <div class="m-3">
+        <label for="{{ form.id_for_label }}">{{ form.label }}</label>
+        <div class="border-bottom border-dark border-bottom-width:5px"> {{ form }}</div>
     </div>
     {% endfor %}
 
