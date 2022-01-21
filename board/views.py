@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpRequest
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 
@@ -26,38 +27,26 @@ def article_modify(request, article_id):
     context = {'form': form}
     return render(request, 'board/article_form.html', context)
 
+
 def Article_detail(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
     return render(request, 'board/article_detail.html', {'article': article})
+
 
 def Article_list(request):
     articles = Article.objects.all().order_by('-id')
     return render(request, 'board/article_list.html', {"articles": articles})
 
+
 def Article_write(request):
-    article = Article.objects.all() # models의 Article 개체 생성
-    context = {'article': article}
-
-    if request.method == 'GET':
-        write_form = ArticleWriteForm()
-        context['forms'] = write_form
-        return render(request, 'board/article_write.html', context)
-
-    elif request.method == 'POST':
-        write_form = ArticleWriteForm(request.POST)
-
-        if write_form.is_valid():
-            article = Article(
-                title=write_form.title,
-                body=write_form.body,
-                one_source=write_form.one_source,
-                information_source=write_form.information_source
-            )
+    if request.method == 'POST':
+        form = ArticleWriteForm(request.POST)
+        if form.is_valid():
+            article = form.save(commit=False)
+            board.writer = request.user
             article.save()
-            return redirect('board:detail', article_id=article.id)
-        else:
-            context['forms'] = write_form
-            if write_form.error:
-                for value in write_form.errors.values():
-                    context['error'] = value
-            return render(request, 'board/article_write.html', context)
+            return redirect('board:detail')
+    else:
+        form = ArticleWriteForm()
+    context = {'form': form}
+    return render(request, 'board/article_write.html', context)

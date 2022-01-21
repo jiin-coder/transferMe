@@ -18,29 +18,16 @@ class ArticleWriteForm(forms.ModelForm):
         ]
 
         widgets = {
-            'body': SummernoteWidget()
+            'body': SummernoteWidget(),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'one_source': forms.TextInput(attrs={'class': 'form-control'}),
+            'information_source': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
-        def clean(self):
-            # pass2
-            cleaned_data = super().clean()
-
-            title = cleaned_data.get('title', '')
-            body = cleaned_data.get('body', '')
-            one_source = cleaned_data.get('one_source', '')
-            information_source = cleaned_data.get('information_source', '')
-
-            if title == '':
-                self.add_error('title', '제목')
-            elif body == '':
-                self.add_error('body', '내용')
-            elif one_source == '':
-                self.add_error('one_source', '출처명')
-            elif information_source == '':
-                self.add_error('information_source', '출처링크')
-            else:
-                self.title = title
-                self.body = body
-                self.one_source = one_source
-                self.information_source = information_source
+        labels = {
+            'title': '제목',
+            'body': '내용',
+            'one_source': '출처',
+            'information_source': '출처링크',
+        }
 

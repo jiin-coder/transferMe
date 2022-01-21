@@ -2,34 +2,28 @@
 
 {% block content %}
 <!-- 사용자오류 표시 -->
-{% if messages %}
-<div class="alert alert-danger my-3" role="alert">
-    {% for message in messages %}
-    <strong>{{ message.tags }}</strong>
-    <ul>
-        <li>{{ message.message }}</li>
-    </ul>
-    {% endfor %}
+
+<div class="container">
+    <header class="post-header">
+        <h4 class="title m-2" style="font-size:2rem">{{ article.title }}</h4>
+    </header>
+
+
+    <hr>
+
+    <div class="m-3">{{ article.body|safe }}</div>
+
+    <hr>
+
+    <div class="m-3">{{ article.one_source }}</div>
+
+    <hr>
+
+    <div class="m-3">{{ article.information_source }}</div>
+
 </div>
-{% endif %}
 
-
-<div>{{ article.title }}</div>
-
-<hr>
-
-<div>{{ article.body }}</div>
-
-<hr>
-
-<div>{{ article.one_source }}</div>
-
-<hr>
-
-<div>{{ article.information_source }}</div>
-
-
-<div class="my-3">
+<div class="m-3" stayle=" float:right;">
     <a href="{% url 'board:article_modify' article.id %}"
        class="btn btn-sm btn-outline-secondary">수정</a>
 </div>

@@ -35,6 +35,6 @@ def signup(request: HttpRequest):
             return redirect(next_url)
     else:
         form = SignupForm()
-    return render(request, '', {
+    return render(request, 'accounts/signup.html', {
         'form': form,
     })
