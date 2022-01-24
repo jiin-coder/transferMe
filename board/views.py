@@ -13,12 +13,14 @@ from django.contrib import messages
 
 
 @login_required(login_url='accounts:signin')
-def article_delete(request, article_id):
+def article_delete(request: HttpRequest, article_id):
     article = get_object_or_404(Article, id=article_id)
+
     if request.user != article.writer:
         messages.error(request, '삭제권한이 없습니다')
         return redirect('board:detail', article_id=article.id)
     article.delete()
+    messages.success(request, "글이 삭제되었습니다.")
     return redirect('board:list')
 
 

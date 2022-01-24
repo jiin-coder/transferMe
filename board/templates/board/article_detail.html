@@ -1,9 +1,10 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<!-- 사용자오류 표시 -->
+
 
 <div class="container">
+
     <header class="post-header">
         <h4 class="title m-2" style="font-size:2rem">{{ article.title }}</h4>
     </header>
@@ -23,12 +24,14 @@
 
 </div>
 
+{% if article.writer == request.user %}
 <div class="m-3" style="float:right;">
     <a href="{% url 'board:article_modify' article.id %}"
        class="btn btn-sm btn-outline-secondary">수정</a>
-    <a href="#" class="delete btn btn-sm btn-outline-secondary"
-       data-uri="{% url 'board:article_delete' article.id  %}">삭제</a>
+    <a href="{% url 'board:article_delete' article.id%}" class="btn btn-sm btn-warning"
+       onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;">삭제</a>
 </div>
+{% endif %}
 
 
 {% endblock %}
@@ -42,5 +45,7 @@ $(document).ready(function(){
         }
     });
 });
+
+
 </script>
 {% endblock %}
