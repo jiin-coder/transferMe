@@ -7,7 +7,7 @@
 <div class="container my-3">
     <table class="table">
         <thead>
-        <tr class="thead-dark">
+        <tr class="thead-dark text-center">
             <th>id</th>
             <th>제목</th>
             <th>작성자</th>
@@ -18,7 +18,7 @@
         <tbody>
         {% if articles %}
         {% for article in articles %}
-        <tr>
+        <tr class="text-center">
             <td>
                 <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
                 {{ articles.paginator.count|sub:articles.start_index|sub:forloop.counter0|add:1 }}
