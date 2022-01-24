@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.http import HttpRequest
 from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 from django.urls import resolve
@@ -52,8 +53,19 @@ def Article_detail(request, article_id):
 
 
 def Article_list(request):
-    articles = Article.objects.all().order_by('-id')
-    return render(request, 'board/article_list.html', {"articles": articles})
+
+    # 입력 파라미터
+    page = request.GET.get('page', '1') # 페이지
+
+    # 조회
+    articles = Article.objects.all().order_by('-reg_date')
+
+    # 페이징처리
+    paginator = Paginator(articles, 10) # 페이지당 10개씩 보여주기
+    page_obj = paginator.get_page(page)
+    context = {'articles': page_obj}
+
+    return render(request, 'board/article_list.html', context)
 
 
 def Article_write(request):
