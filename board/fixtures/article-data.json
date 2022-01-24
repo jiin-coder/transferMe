@@ -1,0 +1,75 @@
+[
+  {
+    "model": "board.article",
+    "fields": {
+      "writer": 2,
+      "title": "제목1",
+      "body": "내용1",
+      "one_source": "출처명1",
+      "information_source": "출처링크1",
+      "reg_date": "2022-01-24T16:43:29.899",
+      "update_date": "2022-01-24T16:43:29.899"
+    }
+  },
+  {
+    "model": "board.article",
+    "fields": {
+      "writer": 1,
+      "title": "제목2",
+      "body": "내용2",
+      "one_source": "출처명2",
+      "information_source": "출처링크2",
+      "reg_date": "2022-01-24T16:43:29.899",
+      "update_date": "2022-01-24T16:43:29.899"
+    }
+  },
+  {
+    "model": "board.article",
+    "fields": {
+      "writer": 1,
+      "title": "제목3",
+      "body": "내용3",
+      "one_source": "출처명3",
+      "information_source": "출처링크3",
+      "reg_date": "2022-01-24T16:43:29.899",
+      "update_date": "2022-01-24T16:43:29.899"
+    }
+  },
+  {
+    "model": "board.article",
+    "fields": {
+      "writer": 1,
+      "title": "제목4",
+      "body": "내용4",
+      "one_source": "출처명4",
+      "information_source": "출처링크4",
+      "reg_date": "2022-01-24T16:43:29.899",
+      "update_date": "2022-01-24T16:43:29.899"
+    }
+  },
+  {
+    "model": "board.article",
+    "fields": {
+      "writer": 1,
+      "title": "제목4",
+      "body": "내용4",
+      "one_source": "출처명4",
+      "information_source": "출처링크4",
+      "reg_date": "2022-01-24T16:43:29.899",
+      "update_date": "2022-01-24T16:43:29.899"
+    }
+  },
+  {
+    "model": "board.article",
+    "fields": {
+      "writer": 1,
+      "title": "제목5",
+      "body": "내용5",
+      "one_source": "출처명5",
+      "information_source": "출처링크5",
+      "reg_date": "2022-01-24T16:43:29.899",
+      "update_date": "2022-01-24T16:43:29.899"
+    }
+  }
+
+]
