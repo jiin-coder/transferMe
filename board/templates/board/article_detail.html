@@ -22,15 +22,16 @@
 
     <div class="m-3">{{ article.information_source }}</div>
 
+    {% if article.writer == request.user %}
+    <div class="m-3" style="float:right;">
+        <a href="{% url 'board:article_modify' article.id %}"
+           class="btn btn-sm btn-outline-secondary" style="background-color:black; color:white;">수정</a>
+        <a href="{% url 'board:article_delete' article.id%}" class="btn btn-sm btn-outline-secondary" style="color:black;"
+           onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;">삭제</a>
+    </div>
 </div>
 
-{% if article.writer == request.user %}
-<div class="m-3" style="float:right;">
-    <a href="{% url 'board:article_modify' article.id %}"
-       class="btn btn-sm btn-outline-secondary">수정</a>
-    <a href="{% url 'board:article_delete' article.id%}" class="btn btn-sm btn-warning"
-       onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;">삭제</a>
-</div>
+
 {% endif %}
 
 
@@ -45,6 +46,7 @@ $(document).ready(function(){
         }
     });
 });
+
 
 
 </script>
