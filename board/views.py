@@ -61,7 +61,7 @@ def Article_list(request):
     articles = Article.objects.all().order_by('-reg_date')
 
     # 페이징처리
-    paginator = Paginator(articles, 10) # 페이지당 10개씩 보여주기
+    paginator = Paginator(articles, 1000) # 페이지당 10개씩 보여주기
     page_obj = paginator.get_page(page)
     context = {'articles': page_obj}
 
