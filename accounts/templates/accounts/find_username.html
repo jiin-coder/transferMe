@@ -5,19 +5,14 @@
 
 <section class="section-signup t-flex-1 t-flex t-items-center t-justify-center">
     <div class="card t-w-full t-max-w-screen-md mx-4">
-        <div class="card-header">로그인</div>
+        <div class="card-header">아이디찾기</div>
         <div class="card-body">
-            <form method="POST" action="">
+            <form method="POST">
                 {% csrf_token %}
                 {% bootstrap_form form %}
-                {% bootstrap_button button_type="submit" content="로그인" %}
+                {% bootstrap_button button_type="submit" content="아이디찾기" %}
                 {% bootstrap_button button_type="reset" content="취소" %}
             </form>
-            <div class="m-3">
-                <hr>
-                <a href="{% url 'accounts:kakao_signin' %}">카카오로 로그인</a>
-            </div>
-
         </div>
     </div>
 </section>

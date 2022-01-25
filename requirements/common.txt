@@ -5,3 +5,5 @@ gunicorn
 django-debug-toolbar
 django_bootstrap5
 django-summernote
+requests
+django-dotenv
