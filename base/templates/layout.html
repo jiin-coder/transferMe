@@ -69,6 +69,13 @@
                     </li>
                     {% endif %}
                 </ul>
+
+                <form class="d-flex" id="searchForm" method="GET" action="{% url 'board:list'%}">
+                    <input class="form-control me-2" type="search" name="kw" placeholder="키워드를 입력해주세요."
+                           aria-label="Search" value="{{ kw|default_if_none:'' }}">
+                    <input type="hidden" id="page" name="page" value="{{ page }}">
+                    <button class="btn btn-outline-success t-whitespace-nowrap" type="submit">검색</button>
+                </form>
             </div>
         </div>
     </nav>
@@ -86,9 +93,28 @@
 </footer>
 
 
-<!-- 자바스크립트 Start -->
 {% block script %}
+<script type='text/javascript'>
+$(document).ready(function(){
+    $(".page-link").on('click', function() {
+        $("#page").val($(this).data("page"));
+        $("#searchForm").submit();
+    });
+
+    $("#btn_search").on('click', function() {
+        $("#kw").val($(".kw").val());
+        $("#page").val(1);  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+        $("#searchForm").submit();
+    });
+
+    $(".so").on('change', function() {
+        $("#so").val($(this).val());
+        $("#page").val(1);
+        $("#searchForm").submit();
+    });
+});
+
+</script>
 {% endblock %}
-<!-- 자바스크립트 End -->
 </body>
 </html>

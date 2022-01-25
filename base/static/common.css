@@ -473,6 +473,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0px;
 }
 
+.t-mt-\[30px\] {
+  margin-top: 30px;
+}
+
 .t-flex {
   display: flex;
 }
@@ -505,6 +509,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-content: center;
 }
 
+.t-whitespace-nowrap {
+  white-space: nowrap;
+}
+
 .t-py-\[20px\] {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -524,6 +532,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .t-font-bold {
   font-weight: 700;
+}
+
+.t-text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
 @font-face {

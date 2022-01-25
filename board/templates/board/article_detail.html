@@ -9,6 +9,9 @@
         <h4 class="title m-2" style="font-size:2rem">{{ article.title }}</h4>
     </header>
 
+    <hr>
+
+    <div class="m-3">{{ article.writer }}</div>
 
     <hr>
 
@@ -24,8 +27,8 @@
 
     <div class="row my-3">
         <div class="col-1"> <!-- 추천영역 -->
-            <div class="bg-light text-center p-3 border font-weight-bolder mb-1">{{article.voter.count}}</div>
-            <a href="#" data-uri="{% url 'board:vote_article' writer.id  %}"
+            <div class="text-center p-3 border font-weight-bolder mb-1">{{article.voter.count}}</div>
+            <a href="#" data-uri="{% url 'board:vote_article' article.id %}"
                class="recommend btn btn-sm btn-secondary btn-block my-1">추천</a>
         </div>
     </div>
@@ -40,54 +43,16 @@
     </div>
 </div>
 {% endif %}
-
-<!-- 필사글 댓글 Start -->
-    {% if article.comment_set.count > 0 %}
-        <div class="mt-3">
-        {% for comment in article.comment_set.all %}
-            <div class="comment py-2 text-muted">
-                <span style="white-space: pre-line;">{{ comment.content }}</span>
-                <span>
-                    - {{ comment.writer }}, {{ comment.reg_date }}
-                    {% if comment.update_date %}
-                    (수정:{{ comment.update_date }})
-                    {% endif %}
-                </span>
-                {% if request.user == comment.writer %}
-                <a href="{% url 'board:comment_modify_article' comment.id  %}" class="small">수정</a>,
-                <a href="#" class="small delete"
-                   data-uri="{% url 'board:comment_delete_article' comment.id  %}">삭제</a>
-                {% endif %}
-            </div>
-        {% endfor %}
-        </div>
-        {% endif %}
-        <div>
-            <a href="{% url 'board:comment_create_article' article.id  %}"
-               class="small"><small>댓글 추가 ..</small></a>
-        </div>
-
-
 {% endblock %}
 
 {% block script %}
 <script type='text/javascript'>
 $(document).ready(function(){
-    $(".delete").on('click', function() {
-        if(confirm("정말로 삭제하시겠습니까?")) {
-            location.href = $(this).data('uri');
-        }
-    });
     $(".recommend").on('click', function() {
         if(confirm("정말로 추천하시겠습니까?")) {
             location.href = $(this).data('uri');
         }
     });
 });
-
-
-
-
-
 </script>
 {% endblock %}

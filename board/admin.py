@@ -8,9 +8,18 @@ from django_summernote.admin import SummernoteModelAdmin
 class BoardAdmin(SummernoteModelAdmin):
     summernote_fields = ('body', )
     list_display = (
+        'writer',
         'title',
         'body',
         'one_source',
         'information_source'
     )
     list_display_links = list_display
+    search_fields = [
+
+        'writer',
+        'title',
+        'body',
+        'one_source',
+        'information_source'
+    ]

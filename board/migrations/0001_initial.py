@@ -29,5 +29,5 @@ class Migration(migrations.Migration):
                 ('writer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='작성자')),
             ],
         ),
-        migrations.RunPython(gen_master_article),
+        # migrations.RunPython(gen_master_article),
     ]

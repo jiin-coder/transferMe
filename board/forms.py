@@ -1,8 +1,9 @@
 from django import forms
+from django.forms import ModelForm
 from django_summernote.fields import SummernoteTextField
 from django_summernote.widgets import SummernoteWidget
 
-from .models import Article, Comment
+from .models import Article
 
 
 class ArticleWriteForm(forms.ModelForm):
@@ -29,12 +30,4 @@ class ArticleWriteForm(forms.ModelForm):
             'body': '내용',
             'one_source': '출처',
             'information_source': '출처링크',
-        }
-
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = ['content']
-        labels = {
-            'content': '댓글내용',
         }
