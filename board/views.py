@@ -12,9 +12,6 @@ from .models import Article
 from django.contrib import messages
 
 
-
-
-
 @login_required(login_url='account:signin')
 def vote_article(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
@@ -79,9 +76,9 @@ def article_list(request):
 
     # 검색
     if kw:
-        articles = articles.filter(
-            Q(body__icontains=kw)
-        ).distinct()
+        articles = Article.objects.filter(
+            Q(title__icontains=kw) | Q(body__icontains=kw) | Q(one_source__icontains=kw) | Q(
+                information_source__icontains=kw) | Q(writer__username__icontains=kw)).distinct()
 
     # 페이징처리
     paginator = Paginator(articles, 1000)  # 페이지당 10개씩 보여주기

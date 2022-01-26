@@ -10,12 +10,17 @@
             <form method="POST" action="">
                 {% csrf_token %}
                 {% bootstrap_form form %}
-                {% bootstrap_button button_type="submit" content="로그인" %}
-                {% bootstrap_button button_type="reset" content="취소" %}
+                <button type="submit" class="btn btn-outline-primary">
+                    로그인
+                </button>
+                <button type="button" class="btn btn-outline-primary">
+                    <a href="#">취소</a>
+                </button>
             </form>
             <div class="m-3">
-                <hr>
-                <a href="{% url 'accounts:kakao_signin' %}">카카오로 로그인</a>
+                <button class="btn btn-outline-warning" type="submit">
+                    <a href="{% url 'accounts:kakao_signin' %}" style="color:black;">카카오로 로그인</a>
+                </button>
             </div>
 
         </div>

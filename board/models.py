@@ -23,3 +23,6 @@ class Article(models.Model):
 
 
 
+
+
+
