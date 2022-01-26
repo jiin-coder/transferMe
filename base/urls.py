@@ -22,7 +22,7 @@ from . import views
 APP_NAME = ''
 
 urlpatterns = [
-    path('', views.index, name="main"),
+    path('', views.index, name="index"),
     path('admin/', admin.site.urls, name="admin"),
     path('accounts/', include('accounts.urls'), name="accounts"),
     path('board/', include('board.urls'), name="board"),

@@ -64,15 +64,6 @@ def article_list(request):
     # 입력 파라미터
     page = request.GET.get('page', '1')  # 페이지
     kw = request.GET.get('kw', '')  # 검색어
-    so = request.GET.get('so', 'recent')  # 정렬기준
-
-    # 정렬
-    if so == 'recommend':
-        articles = Article.objects.annotate(num_voter=Count('voter')).order_by('-num_voter', '-reg_date')
-    elif so == 'popular':
-        articles = Article.objects.annotate(num_answer=Count('answer')).order_by('-num_answer', '-reg_date')
-    else:  # recent
-        articles = Article.objects.order_by('-id')
 
     # 검색
     if kw:
