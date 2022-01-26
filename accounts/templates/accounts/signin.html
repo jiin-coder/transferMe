@@ -13,17 +13,21 @@
                 <button type="submit" class="btn btn-outline-primary">
                     로그인
                 </button>
+                <button type="reset" class="btn btn-outline-primary">취소</button>
+
                 <button type="button" class="btn btn-outline-primary">
-                    <a href="#">취소</a>
+                    <a href="{% url 'accounts:signup' %}">회원가입</a>
                 </button>
-            </form>
-            <div class="m-3">
+
+
                 <button class="btn btn-outline-warning" type="submit">
                     <a href="{% url 'accounts:kakao_signin' %}" style="color:black;">카카오로 로그인</a>
                 </button>
-            </div>
-
+            </form>
         </div>
+
+
+    </div>
     </div>
 </section>
 
