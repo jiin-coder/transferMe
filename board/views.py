@@ -61,6 +61,9 @@ def article_detail(request, article_id):
 
 
 def article_list(request):
+
+    articles = Article.objects.all().order_by('-id')
+
     # 입력 파라미터
     page = request.GET.get('page', '1')  # 페이지
     kw = request.GET.get('kw', '')  # 검색어
@@ -74,7 +77,7 @@ def article_list(request):
     # 페이징처리
     paginator = Paginator(articles, 1000)  # 페이지당 10개씩 보여주기
     page_obj = paginator.get_page(page)
-    context = {'articles': page_obj, 'page': page, 'kw': kw, 'so': so}
+    context = {'articles': page_obj, 'page': page, 'kw': kw}
 
     return render(request, 'board/article_list.html', context)
 
