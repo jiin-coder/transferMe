@@ -13,7 +13,8 @@
             <tr class="thead-dark text-center">
                 <th>id</th>
                 <th>제목</th>
-                <th></th>
+                <th>댓글수</th>
+                <th>추천수</th>
                 <th>작성자</th>
                 <th>작성일자</th>
                 <th>수정일자</th>
@@ -32,6 +33,11 @@
                     <a href="{% url 'board:article_detail' article.id %}" style="text-decoration:none; color: inherit">
                         {{ article.title }}
                     </a>
+                </td>
+                <td>
+                    {% if article.comment_set.count > 0 %}
+                    <span style="color:blue;">({{ article.comment_set.count }})</span>
+                    {% endif %}
                 </td>
                 <td>
                     {% if article.voter.all.count > 0 %}

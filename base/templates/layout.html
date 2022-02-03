@@ -40,15 +40,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'board:list' %}"><i class="fas fa-list"></i> 광장</a>
+                    </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'board:write' %}">
                             <i class="fas fa-pencil-alt"></i>
                             필사하기
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'board:list' %}"><i class="fas fa-list"></i> 리스트</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'accounts:signout' %}"><i class="fas fa-sign-out-alt"></i> 로그아웃</a>
@@ -68,7 +68,7 @@
                         <a class="nav-link" href="{% url 'accounts:signup' %}"><i class="fas fa-user-plus"></i> 회원가입</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:find_username' %}">아이디찾기</a>
+                        <a class="nav-link" href="{% url 'accounts:find_username' %}"> <i class="fas fa-portrait"></i>&nbsp; 아이디찾기</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -85,8 +85,8 @@
 </header>
 
 <section class="t-flex-1 t-py-[20px] t-flex t-flex-col">
-    {%block content%}
-    {%endblock%}
+    {% block content %}
+    {% endblock %}
 </section>
 
 <footer class="footer py-3 bg-light">
@@ -116,6 +116,8 @@ $(document).ready(function(){
         $("#searchForm").submit();
     });
 });
+
+
 
 </script>
 {% endblock %}

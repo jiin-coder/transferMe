@@ -1,9 +1,9 @@
 from django import forms
+from django_summernote.widgets import SummernoteWidget
+from .models import Article
+
 from django.forms import ModelForm
 from django_summernote.fields import SummernoteTextField
-from django_summernote.widgets import SummernoteWidget
-
-from .models import Article
 
 
 class ArticleWriteForm(forms.ModelForm):
@@ -31,3 +31,5 @@ class ArticleWriteForm(forms.ModelForm):
             'one_source': '출처',
             'information_source': '출처링크',
         }
+
+

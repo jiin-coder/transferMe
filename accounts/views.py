@@ -129,4 +129,4 @@ def kakao_login_callback(request):
 
     messages.success(request, "카카오톡 계정으로 로그인되었습니다")
 
-    return redirect("main")
+    return redirect("index")

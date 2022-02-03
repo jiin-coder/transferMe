@@ -1,8 +1,10 @@
 from django.contrib import admin
-from .models import Article
+from .models import Article, Comment
 from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
+
+admin.site.register(Comment)
 
 @admin.register(Article)
 class BoardAdmin(SummernoteModelAdmin):
@@ -23,3 +25,4 @@ class BoardAdmin(SummernoteModelAdmin):
         'one_source',
         'information_source'
     ]
+

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'base',
     'accounts',
     'board',
+    'comments',
 ]
 
 MIDDLEWARE = [

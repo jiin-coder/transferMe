@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.contenttypes.models import ContentType
 from django.core import exceptions
 from django.core.paginator import Paginator
 from django.db.models import Count, Q
@@ -6,10 +7,50 @@ from django.http import HttpRequest
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 
+from comments.forms import CommentForm
 from .forms import ArticleWriteForm
-from .models import Article
+from .models import Article, Comment
 
 from django.contrib import messages
+
+
+@login_required
+def comment_delete(request: HttpRequest, article_id, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    if request.user != comment.user:
+        raise exceptions.PermissionDenied()
+
+    comment.delete()
+
+    messages.success(request, "댓글이 삭제되었습니다.")
+
+    return redirect("board:article_detail", article_id=article_id)
+
+
+def comment_modify(request: HttpRequest, article_id, comment_id):
+    article = get_object_or_404(Article, id=article_id)
+    comment = get_object_or_404(Comment, id=comment_id)
+    comments = Comment.objects.all().order_by('-id')
+
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, "댓글이 수정되었습니다.")
+            return redirect("board:article_detail", article_id=article_id)
+    else:
+        form = CommentForm(None, instance=comment)
+
+    context = {
+        "article": article,
+        "comments": comments,
+        "CommentForm": form,
+    }
+
+    return render(request, "board/comment_modify.html", context)
+
 
 
 @login_required(login_url='account:signin')
@@ -55,10 +96,37 @@ def article_modify(request, article_id):
     return render(request, 'board/article_write.html', {'form': form})
 
 
-def article_detail(request, article_id):
-    article = get_object_or_404(Article, pk=article_id)
-    return render(request, 'board/article_detail.html', {'article': article})
+def article_detail(request: HttpRequest, article_id):
+    article = get_object_or_404(Article, id=article_id)
 
+    if request.method == "POST" and request.user.is_authenticated:
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.content_type = ContentType.objects.get_for_model(article)
+            comment.object_id = article.id
+            comment.user = request.user
+            comment.save()
+            messages.success(request, "댓글이 등록되었습니다.")
+
+            return redirect("board:article_detail", article_id=article.id)
+    else:
+        form = CommentForm()
+
+        form.errors
+
+    comments = article.comments.order_by('-id')
+    context = {
+        "article": article,
+        "comments": comments,
+        "CommentForm": form,
+    }
+
+    return render(request, 'board/article_detail.html', context)
+
+
+def comment_create(request: HttpRequest, article_id):
+    return article_detail(request, article_id)
 
 def article_list(request):
 
