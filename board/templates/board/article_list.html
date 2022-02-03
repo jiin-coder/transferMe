@@ -35,8 +35,8 @@
                     </a>
                 </td>
                 <td>
-                    {% if article.comment_set.count > 0 %}
-                    <span style="color:blue;">({{ article.comment_set.count }})</span>
+                    {% if article.comments.all.count > 0 %}
+                    <span style="color:blue;">({{ article.comments.all.count }})</span>
                     {% endif %}
                 </td>
                 <td>
