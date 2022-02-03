@@ -31,7 +31,6 @@ def comment_delete(request: HttpRequest, article_id, comment_id):
 def comment_modify(request: HttpRequest, article_id, comment_id):
     article = get_object_or_404(Article, id=article_id)
     comment = get_object_or_404(Comment, id=comment_id)
-    comments = Comment.objects.all().order_by('-id')
 
     if request.method == "POST":
         form = CommentForm(request.POST, instance=comment)
@@ -45,7 +44,7 @@ def comment_modify(request: HttpRequest, article_id, comment_id):
 
     context = {
         "article": article,
-        "comments": comments,
+        "comment": comment,
         "CommentForm": form,
     }
 

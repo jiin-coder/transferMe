@@ -64,13 +64,6 @@
                 <button type="submit" class="btn btn-outline-dark" style="float:right;" value="댓글등록">
                     댓글등록
                 </button>
-
-
-            </form>
-            {% else %}
-            <div class="t-text-gray-400">
-                <a href="{% url 'accounts:signin' %}?next={{request.get_full_path}}">로그인</a> 후 이용해주세요.
-            </div>
             {% endif %}
 
             {% if CommentForm.errors %}
@@ -138,13 +131,5 @@ $(document).ready(function(){
         }
     });
 });
-
-
-
-
-
-
-
-
 </script>
 {% endblock %}
