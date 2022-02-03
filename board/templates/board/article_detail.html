@@ -4,74 +4,77 @@
 {% block content %}
 
 <div class="container">
-    <header class="post-header">
-        <h4 class="title m-2" style="font-size:2rem">{{ article.title }}</h4>
-    </header>
+    <div class="m-3">
+        <header class="post-header">
+            <h4 class="title m-2" style="font-size:2rem">{{ article.title }}</h4>
+        </header>
 
-    <hr>
+        <hr>
 
-    <div class="m-3">{{ article.writer.username }}
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-        {{ article.update_date }}
-    </div>
-
-    <hr>
-
-    <div class="m-3">{{ article.body|safe }}</div>
-
-    <hr>
-
-    <div class="m-3">{{ article.one_source }}</div>
-
-    <hr>
-
-    <div class="m-3">{{ article.information_source }}</div>
-
-    <div class="row my-3">
-        <div class="col-1"> <!-- 추천영역 -->
-            <div class="text-center p-3 border font-weight-bolder mb-1">{{article.voter.count}}</div>
-            <a href="#" data-uri="{% url 'board:vote_article' article.id %}"
-               class="recommend btn btn-sm btn-secondary btn-block my-1">추천</a>
+        <div class="m-3">{{ article.writer.username }}
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            {{ article.update_date }}
         </div>
-    </div>
 
-    {% if article.writer == request.user %}
-    <div class="m-3" style="float:right;">
-        <a href="{% url 'board:article_modify' article.id %}"
-           class="btn btn-secondary">수정</a>
-        <a href="{% url 'board:article_delete' article.id%}" class="btn btn-warning"
-           onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;">삭제</a>
+        <hr>
+
+        <div class="m-3">{{ article.body|safe }}</div>
+
+        <hr>
+
+        <div class="m-3">{{ article.one_source }}</div>
+
+        <hr>
+
+        <div class="m-3">{{ article.information_source }}</div>
+
+        <div>
+            <div class="m-3" style="float:left;"> <!-- 추천영역 -->
+                <a href="#" data-uri="{% url 'board:vote_article' article.id %}"
+                   class="recommend btn btn-danger"> ❤ <strong>{{article.voter.count}}</strong></a>
+            </div>
+
+            {% if article.writer == request.user %}
+            <div class="m-3" style="float:right;">
+                <a href="{% url 'board:article_modify' article.id %}"
+                   class="btn btn-secondary">수정</a>
+                <a href="{% url 'board:article_delete' article.id%}" class="btn btn-warning"
+                   onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;">삭제</a>
+            </div>
+            {% endif %}
+        </div>
+
+
     </div>
-    {% endif %}
 </div>
 
-
-<div class="card m-3">
-    <div class="card-header">
-        댓글 작성
-    </div>
-
-    <div class="card-body">
-        {% if user.is_authenticated %}
-
-        <form method="POST" action="{% url 'board:comment_create' article.id %}">
-            {% csrf_token %}
-
-            {% bootstrap_form CommentForm %}
-            <button type="submit" class="btn btn-outline-dark" style="float:right;" value="댓글등록">
-                댓글등록
-            </button>
-
-
-        </form>
-        {% else %}
-        <div class="t-text-gray-400">
-            <a href="{% url 'accounts:signin' %}?next={{request.get_full_path}}">로그인</a> 후 이용해주세요.
+<div class="container">
+    <div class="card m-3">
+        <div class="card-header">
+            댓글 작성
         </div>
-        {% endif %}
 
-        {% if CommentForm.errors %}
-        <script>
+        <div class="card-body">
+            {% if user.is_authenticated %}
+
+            <form method="POST" action="{% url 'board:comment_create' article.id %}">
+                {% csrf_token %}
+
+                {% bootstrap_form CommentForm %}
+                <button type="submit" class="btn btn-outline-dark" style="float:right;" value="댓글등록">
+                    댓글등록
+                </button>
+
+
+            </form>
+            {% else %}
+            <div class="t-text-gray-400">
+                <a href="{% url 'accounts:signin' %}?next={{request.get_full_path}}">로그인</a> 후 이용해주세요.
+            </div>
+            {% endif %}
+
+            {% if CommentForm.errors %}
+            <script>
                     let $lastForm = $('form').last();
                     $(window).on('load', function() {
                         $(window).scrollTop($lastForm.offset().top);
@@ -79,52 +82,50 @@
 
 
 
+            </script>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <div class="card m-3">
+        {% if article.comments.all.count > 0 %}
+        <div class="card-header">
+            {{ article.comments.all.count }} 개의 댓글
+        </div>
+
+        <ul class="list-group list-group-flush">
+            {% for comment in comments %}
+            <li class="list-group-item" style="display:inline-block;">
+
+                <div><strong>{{comment.user}}</strong>
+                    {{comment.update_date}}
+                </div>
 
 
-        </script>
+                <div>{{comment.body}}</div>
+                <div style="text-align:right">
+                    {% if comment.user == request.user %}
+                    <a href="{% url 'board:comment_modify' article.id comment.id %}"
+                       class="btn btn-sm btn-secondary">수정</a>
+                    {% endif %}
+                    <a href="{% url 'board:comment_delete' article.id comment.id %}" class="btn btn-sm btn-warning"
+                       onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;">삭제</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+        {% else %}
+        <div class="card-header">
+            <div class="t-text-gray-400">
+                0 개의 댓글
+            </div>
+        </div>
         {% endif %}
 
     </div>
 </div>
-
-<div class="card m-3">
-    {% if article.comments.all.count > 0 %}
-    <div class="card-header">
-        {{ article.comments.all.count }} 개의 댓글
-    </div>
-
-    <ul class="list-group list-group-flush">
-        {% for comment in comments %}
-        <li class="list-group-item" style="display:inline-block;">
-
-            <div><strong>{{comment.user}}</strong>
-                {{comment.update_date}}
-            </div>
-
-
-            <div>{{comment.body}}</div>
-            <div style="text-align:right">
-                {% if comment.user == request.user %}
-                <a href="{% url 'board:comment_modify' article.id comment.id %}"
-                   class="btn btn-sm btn-secondary">수정</a>
-                {% endif %}
-                <a href="{% url 'board:comment_delete' article.id comment.id %}" class="btn btn-sm btn-warning"
-                   onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;">삭제</a>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
-
-    {% else %}
-    <div class="card-header">
-        <div class="t-text-gray-400">
-            0 개의 댓글
-        </div>
-    </div>
-    {% endif %}
-
-</div>
-
 {% endblock %}
 
 
@@ -137,6 +138,9 @@ $(document).ready(function(){
         }
     });
 });
+
+
+
 
 
 
