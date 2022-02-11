@@ -4,41 +4,50 @@
 {% block content %}
 
 <div class="container">
-<header class="m-3">
-    <h1 style="font-size:2rem;">글 작성</h1>
-</header>
+    <header class="m-3">
+        <h1 style="font-size:2rem;">글 작성</h1>
+    </header>
 
 
-<form method="POST" class="post-form my-3">
-    {% csrf_token %}
-    <div class="m-3">
+    <form method="POST" class="post-form my-3">
+        {% csrf_token %}
         <div class="m-3">
-            <label for="{{ form.title_for_label }}">{{ form.title.label }}</label>
-            <div>
-                {{ form.title }}
+            <div class="m-3">
+                <label for="{{ form.title_for_label }}">{{ form.title.label }}</label>
+                <div>
+                    {{ form.title }}
+                </div>
             </div>
-        </div>
 
-        <div class="m-3">
-            <label for="{{ form.body_for_label }}">{{ form.body.label }}</label>
-            <div>
-                {{ form.body }}
+            <div class="m-3">
+                <label for="{{ form.body_for_label }}">{{ form.body.label }}</label>
+                <div>
+                    {{ form.body }}
+                </div>
+            </div>
+
+            <div class="m-3">
+                <label for="{{ form.one_source_for_label }}">{{ form.one_source.label }}</label>
+                <div>
+                    {{ form.one_source }}
+                </div>
+            </div>
+
+            <div class="m-3">
+                <label for="{{ form.information_source_for_label }}">{{ form.information_source.label }}</label>
+                <div>
+                    {{ form.information_source }}
+                </div>
+            </div>
+
+            <div class="m-3">
+                <label for="{{ form.tags_for_label }}">{{ form.tags.label }}</label>
+                <div>
+                    {{ form.tags }}
+                </div>
             </div>
         </div>
-        <div class="m-3">
-            <label for="{{ form.one_source_for_label }}">{{ form.one_source.label }}</label>
-            <div>
-                {{ form.one_source }}
-            </div>
-        </div>
-        <div class="m-3">
-            <label for="{{ form.information_source_for_label }}">{{ form.information_source.label }}</label>
-            <div>
-                {{ form.information_source }}
-            </div>
-        </div>
-    </div>
-    <button type="submit" class="btn text-white m-3" style="background-color: black">업로드</button>
-</form>
-    </div>
+        <button type="submit" class="btn text-white m-3" style="background-color: black">업로드</button>
+    </form>
+</div>
 {% endblock %}

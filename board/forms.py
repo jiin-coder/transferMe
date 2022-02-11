@@ -15,7 +15,8 @@ class ArticleWriteForm(forms.ModelForm):
             'title',
             'body',
             'one_source',
-            'information_source'
+            'information_source',
+            'tags'
         ]
 
         widgets = {
@@ -23,6 +24,7 @@ class ArticleWriteForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'one_source': forms.TextInput(attrs={'class': 'form-control'}),
             'information_source': forms.TextInput(attrs={'class': 'form-control'}),
+            'tags': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
         labels = {
@@ -30,6 +32,7 @@ class ArticleWriteForm(forms.ModelForm):
             'body': '내용',
             'one_source': '출처',
             'information_source': '출처링크',
+            'tags': '태그',
         }
 
 
