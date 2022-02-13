@@ -139,7 +139,7 @@ def article_list(request):
     if kw:
         articles = Article.objects.filter(
             Q(title__icontains=kw) | Q(body__icontains=kw) | Q(one_source__icontains=kw) | Q(
-                information_source__icontains=kw) | Q(writer__username__icontains=kw)).distinct()
+                information_source__icontains=kw) | Q(writer__username__icontains=kw) | Q(tags__icontains=kw)).distinct()
 
     # 페이징처리
     paginator = Paginator(articles, 1000)  # 페이지당 10개씩 보여주기

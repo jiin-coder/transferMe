@@ -28,6 +28,11 @@
 
         <div class="m-3">{{ article.information_source }}</div>
 
+        <hr>
+
+        <div class="m-3">{{ article.tags }}</div>
+
+
         <div>
             <div class="m-3" style="float:left;"> <!-- 추천영역 -->
                 <a href="#" data-uri="{% url 'board:vote_article' article.id %}"
