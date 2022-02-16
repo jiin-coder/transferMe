@@ -2,10 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.core import exceptions
 from django.core.paginator import Paginator
-from django.db.models import Count, Q
+from django.db.models import Q
 from django.http import HttpRequest
 from django.shortcuts import render, redirect, get_object_or_404
-from django.utils import timezone
 
 from comments.forms import CommentForm
 from .forms import ArticleWriteForm
@@ -49,7 +48,6 @@ def comment_modify(request: HttpRequest, article_id, comment_id):
     }
 
     return render(request, "board/comment_modify.html", context)
-
 
 
 @login_required(login_url='account:signin')
@@ -114,7 +112,7 @@ def article_detail(request: HttpRequest, article_id):
 
         form.errors
 
-    comments = article.comments.order_by('-id')
+    comments = article.comments.select_related('user').order_by('-id')
     context = {
         "article": article,
         "comments": comments,
@@ -127,23 +125,23 @@ def article_detail(request: HttpRequest, article_id):
 def comment_create(request: HttpRequest, article_id):
     return article_detail(request, article_id)
 
-def article_list(request):
 
-    articles = Article.objects.all().order_by('-id')
-
+def article_list(request: HttpRequest):
     # 입력 파라미터
     page = request.GET.get('page', '1')  # 페이지
     kw = request.GET.get('kw', '')  # 검색어
+    kws = kw.split(' ')
+
+    articles = Article.objects.all().order_by('-id').distinct()
 
     # 검색
     if kw:
-        articles = Article.objects.filter(
-            Q(title__icontains=kw) | Q(body__icontains=kw) | Q(one_source__icontains=kw) | Q(
-                information_source__icontains=kw) | Q(writer__username__icontains=kw) | Q(tags__icontains=kw)).distinct()
+        articles = articles \
+            .filter(tag_set__name__in=kws)
 
     # 페이징처리
     paginator = Paginator(articles, 1000)  # 페이지당 10개씩 보여주기
-    page_obj = paginator.get_page(page)
+    page_obj = paginator.get_page(kw)
     context = {'articles': page_obj, 'page': page, 'kw': kw}
 
     return render(request, 'board/article_list.html', context)
