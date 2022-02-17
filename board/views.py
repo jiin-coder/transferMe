@@ -1,16 +1,14 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.core import exceptions
 from django.core.paginator import Paginator
-from django.db.models import Q
 from django.http import HttpRequest
 from django.shortcuts import render, redirect, get_object_or_404
 
 from comments.forms import CommentForm
 from .forms import ArticleWriteForm
 from .models import Article, Comment
-
-from django.contrib import messages
 
 
 @login_required
@@ -159,3 +157,25 @@ def article_write(request):
         form = ArticleWriteForm()
     context = {'form': form}
     return render(request, 'board/article_write.html', context)
+
+
+@login_required(login_url='accounts:signin')
+def my_article(request: HttpRequest):
+    articles = Article.objects.filter(writer=request.user)
+
+    # 입력 파라미터
+    page = request.GET.get('page', '1')  # 페이지
+    kw = request.GET.get('kw', '')  # 검색어
+    kws = kw.split(' ')
+
+    # 검색
+    if kw:
+        articles = articles \
+            .filter(tag_set__name__in=kws)
+
+    # 페이징처리
+    paginator = Paginator(articles, 10)  # 페이지당 10개씩 보여주기
+    page_obj = paginator.get_page(page)
+    context = {'articles': page_obj, 'page': page, 'kw': kw}
+
+    return render(request, 'board/my_article.html', context)

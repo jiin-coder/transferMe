@@ -51,6 +51,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'board:myposts' %}"><i class="fas fa-list"></i> 내가 쓴 글</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'accounts:signout' %}"><i class="fas fa-sign-out-alt"></i> 로그아웃</a>
                     </li>
                     <li class="nav-item">
@@ -74,7 +77,7 @@
                 </ul>
 
                 <form class="d-flex" id="searchForm" method="GET" action="{% url 'board:list'%}">
-                    <input class="form-control me-2" type="search" name="kw" placeholder="키워드를 입력해주세요."
+                    <input class="form-control me-2" type="search" name="kw" placeholder="해시태그를 입력해주세요."
                            aria-label="Search" value="{{ kw|default_if_none:'' }}">
                     <input type="hidden" id="page" name="page" value="{{ page }}">
                     <button class="btn btn-outline-success t-whitespace-nowrap" type="submit">검색</button>
