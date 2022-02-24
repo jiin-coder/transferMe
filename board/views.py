@@ -123,7 +123,7 @@ def article_detail(request: HttpRequest, article_id):
 def comment_create(request: HttpRequest, article_id):
     return article_detail(request, article_id)
 
-
+# 광장 (전체게시판 뷰)
 def article_list(request: HttpRequest):
     # 입력 파라미터
     page = request.GET.get('page', '1')  # 페이지
@@ -138,7 +138,7 @@ def article_list(request: HttpRequest):
             .filter(tag_set__name__in=kws)
 
     # 페이징처리
-    paginator = Paginator(articles, 1000)  # 페이지당 10개씩 보여주기
+    paginator = Paginator(articles, 1000)
     page_obj = paginator.get_page(kw)
     context = {'articles': page_obj, 'page': page, 'kw': kw}
 
@@ -152,6 +152,7 @@ def article_write(request):
             article = form.save(commit=False)
             article.writer = request.user
             article.save()
+            messages.success(request, "글이 등록되었습니다.")
             return redirect('board:article_detail', article.id)
     else:
         form = ArticleWriteForm()

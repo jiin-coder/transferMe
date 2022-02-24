@@ -58,6 +58,9 @@ class Article(models.Model):
             tag_list.append(tag)
         return tag_list
 
+    def summary(self):
+        return self.body[:30]
+
 
 
 
