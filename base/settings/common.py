@@ -161,28 +161,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Summernote 선택 설정
 SUMMERNOTE_THEME = 'bs4'
 
-SUMMERNOTE_CONFIG= {
-            'attachment_filesize_limit': 1024 * 1024,
-
-            # Summernote settings
-            'summernote': {
-                'width': 720,
-                'height': 480,
-                'lang': None,
-                'toolbar': [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'superscript', 'subscript',
-                              'strikethrough', 'clear']],
-                    ['fontname', ['fontname']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video', 'hr']],
-                    ['view', ['fullscreen', 'codeview']],
-                    ['help', ['help']],
-                ],
-            }
-        }
+SUMMERNOTE_CONFIG = {
+    'summernote': {
+        'width': '100%',
+        'lang': 'ko-KR',
+    }
+}
 
