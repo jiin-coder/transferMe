@@ -165,6 +165,8 @@ SUMMERNOTE_CONFIG = {
     'summernote': {
         'width': '100%',
         'lang': 'ko-KR',
+        'fontNames': ['KyoboHandwriting2020A'],
+        'fontNamesIgnoreCheck': ['KyoboHandwriting2020A'],
     }
 }
 

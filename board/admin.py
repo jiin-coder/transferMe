@@ -18,7 +18,6 @@ class BoardAdmin(SummernoteModelAdmin):
     )
     list_display_links = list_display
     search_fields = [
-
         'writer',
         'title',
         'body',
