@@ -51,17 +51,21 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'board:myposts' %}"><i class="fas fa-list"></i> 내가 쓴 글</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'accounts:signout' %}"><i class="fas fa-sign-out-alt"></i> 로그아웃</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="far fa-user"></i>
-                            {{user.first_name}}님 Mypage
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                           <i class="bi bi-person-circle"></i> {{user.username}}님 Mypage
                         </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" href="{% url 'board:myposts' %}"> 내가 쓴 글</a></li>
+                            <li><a class="dropdown-item" href="{% url 'accounts:edit' %}"> 회원정보 수정</a></li>
+                        </ul>
                     </li>
+
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'accounts:signin' %}?next={{request.path}}"><i
@@ -71,7 +75,8 @@
                         <a class="nav-link" href="{% url 'accounts:signup' %}"><i class="fas fa-user-plus"></i> 회원가입</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:find_username' %}"> <i class="fas fa-portrait"></i>&nbsp; 아이디찾기</a>
+                        <a class="nav-link" href="{% url 'accounts:find_username' %}"> <i class="fas fa-portrait"></i>&nbsp;
+                            아이디찾기</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -119,6 +124,8 @@ $(document).ready(function(){
         $("#searchForm").submit();
     });
 });
+
+
 
 
 

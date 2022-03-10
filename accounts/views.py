@@ -1,8 +1,9 @@
 
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import (
-    logout_then_login, LoginView,
+    logout_then_login, LoginView, PasswordResetView, PasswordResetConfirmView,
 )
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import QuerySet
@@ -13,7 +14,7 @@ from django.urls import reverse
 from lazy_string import LazyString
 
 from .decorators import logout_required
-from .forms import SignupForm, FindUsernameForm
+from .forms import SignupForm, FindUsernameForm, UserEditForm
 from .models import User
 
 @logout_required
@@ -84,5 +85,24 @@ def find_username(request: HttpRequest):
         'form': form,
     })
 
+@login_required
+def edit(request: HttpRequest):
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "회원정보가 수정되었습니다.")
+            next_url = request.GET.get('next', '/')
+            return redirect(next_url)
+    else:
+        form = UserEditForm(instance=request.user)
+    return render(request, 'accounts/edit.html', {
+        'form': form,
+    })
 
+class MyPasswordResetView(SuccessMessageMixin, PasswordResetView):
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+
+        self.success_message = "비밀번호가 재설정 되었습니다."
 

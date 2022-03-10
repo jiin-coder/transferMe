@@ -473,10 +473,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0px;
 }
 
-.t-mt-\[30px\] {
-  margin-top: 30px;
-}
-
 .t-flex {
   display: flex;
 }
