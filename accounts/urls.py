@@ -1,7 +1,5 @@
-from django.urls import path, reverse_lazy
+from django.urls import path
 from . import views
-from .forms import MyPasswordResetForm
-from .views import MyPasswordResetView
 
 app_name = "accounts"
 

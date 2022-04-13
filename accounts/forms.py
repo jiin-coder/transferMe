@@ -12,14 +12,15 @@ class LoginForm(AuthenticationForm):
 
 
 # username : 닉네임
-# email : 이메일 주소로 로그인
+# email : 이메일 주소로 로그인 (+비번)
 # first_name : 실제 이름
 class SignupForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
         self.fields['email'].required = True
         self.fields['username'].label = '닉네임'
-        self.fields['first_name'].required = True
+
 
     class Meta(UserCreationForm.Meta):
         model = User

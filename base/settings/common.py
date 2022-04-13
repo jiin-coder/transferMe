@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'board',
     'comments',
     'tags',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -169,4 +170,6 @@ SUMMERNOTE_CONFIG = {
         'fontNamesIgnoreCheck': ['KyoboHandwriting2020A'],
     }
 }
+
+GRAPH_MODELS = {'all_applications': True, 'group_models': True,}
 

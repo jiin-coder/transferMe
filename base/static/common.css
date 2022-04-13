@@ -477,6 +477,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: flex;
 }
 
+.t-hidden {
+  display: none;
+}
+
 .t-min-h-screen {
   min-height: 100vh;
 }
@@ -561,4 +565,10 @@ html > body :is(h1, h2, h3, h4, h5, h6) {
   font-weight:normal;
   margin:0;
   font-size:1rem;
+}
+
+@media (min-width: 640px) {
+  .sm\:t-inline {
+    display: inline;
+  }
 }

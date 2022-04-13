@@ -7,3 +7,4 @@ django_bootstrap5
 django-summernote
 requests
 django-dotenv
+django_extensions
